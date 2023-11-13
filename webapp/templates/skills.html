@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container4 container5">
+    <h1 class="page-head">{{ page_head }}</h1>
+    <p class="page-description">{{description}}</p>
+    <p class="page-description">{{current_user.username}}</p>
+      
+    <p class="page-description">{{no_skills}}</p>
+
+    {%for skill in skills%}
+        <div class="skill-box" >
+            <div class="skill-name">{{ skill.title }}</div> 
+            <div class="skill-progress"> 
+                <span  data-width="{{ skill.prog }}%" style="width: 0;" ></span>
+            </div>
+        </div>
+    {% endfor %}
+    <a href="{{url_for('add')}}" class="button">Add Skill</a>
+</div>
+{% endblock content %}
+
+<!-- style="width: {{skill[1] }}% ;" -->

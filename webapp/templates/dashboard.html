@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container5">
+    <section>
+        <div class="container2 ">
+            <h1>welcome, {{current_user.username}} !</h1>
+            <p>your email : {{current_user.email}} </p>
+        </div>
+    </section>
+
+    <section>
+
+        <table border="1">
+            <!-- <caption>Your Skills</caption> -->
+
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Progress</td>
+                    <td>Description</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for skill in skills %}
+                <tr>
+                    <td>{{skill.title}}</td>
+                    <td>{{skill.prog}}</td>
+                    <td>{{skill.desc}}</td>
+                </tr>
+                {% endfor %}
+               
+            </tbody>
+         </table>
+    </section>
+</div>
+{% endblock content %}
