@@ -1,0 +1,91 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #eee;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.page-head,
+.page-description{
+    text-align: center;
+}
+
+@media (max-width: 767px){
+.page-head,
+.page-description {
+    font-size: 1rem;
+    }
+}
+
+.page-head{
+    font-size: 40px;
+    margin: 20px 0 0;
+}
+
+.page-description{
+    font-size: 22px;
+    margin: 10px 0 40px;
+}
+
+
+body,html{
+    height: 100%;
+    position: relative;
+}
+.skill-box{
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    width: 450px;
+}
+.container4{
+    padding-left: 15px;
+    padding-right: 15px; 
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 60px;
+}
+
+@media (max-width: 767px){
+    .skill-box {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            width: 252px;
+        }
+    }
+
+.skill-box .skill-name{
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: bold; 
+}
+.skill-box .skill-progress{
+    background-color: #f7f7f7;
+    padding: 10px;
+    position: relative;
+    transition: width 1s linear;
+}
+
+.skill-box .skill-progress span{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgba(14, 212, 166, 0.818);
+    transition: width 1s linear;
+}
+
+.container5{
+    height: 100%;
+    position: relative;
+}
+.button{
+    margin-bottom: 20px;
+}

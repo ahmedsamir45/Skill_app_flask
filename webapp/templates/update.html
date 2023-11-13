@@ -1,0 +1,22 @@
+{%extends "layout.html"%}
+{% block content%}
+<div class="container abas mt-auto align-items-center ">
+    <form action="" method="POST">
+        {{ form.hidden_tag()}}
+        <select name="my-skills" id="" class="my-skills">
+        {% for skill in skills %}
+
+            <option name="my-skills" value="{{skill.title}}">{{skill.title}}</option>
+        
+        {% endfor %}
+       
+    </select>
+    <div class="form-group"></div>
+    {{ form.skillProg.label(class='form-control-label')}}
+    {{ form.skillProg(class='form-control form-control-lg',max="100",min="0")}}
+</div>
+        {{ form.submit(class="button")}}
+    </form>
+    
+</div>
+{% endblock content %}
