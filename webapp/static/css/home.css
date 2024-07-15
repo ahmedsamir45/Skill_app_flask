@@ -6,25 +6,23 @@
     --main-padding-bottom:100px;
     --Section-background:#ececec;
 }
-.container3{
+.container{
     display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    justify-content: space-evenly;
-    margin-bottom: 40px;
-    margin-top: 40px;
-
+    gap: 100px;
+    flex-wrap: wrap;
+    margin: 100px auto;
 }
-.container2 img{
+.container img{
     border-radius: 50px;
     max-width: 100%;
     background-color: rgb(166, 177, 177);
     
 }
-.container3 p{
+.container p{
     color: #2196f3;
-
+    font-size: 20px;
 }
 footer {
     width: 100%;
