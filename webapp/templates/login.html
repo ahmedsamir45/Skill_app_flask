@@ -1,6 +1,7 @@
 {%extends "layout.html"%}
+{% block loginactive %}active{% endblock %}
 {% block content%}
-<div class="container my-5 border container5">
+<div class="container my-5 border ">
     <form action="" method="POST">
         {{ form.hidden_tag()}}
         <fieldset class="form-group">
@@ -43,13 +44,10 @@
             </div>
         </fieldset>
     </form>
-    <small class="text-muted ml-2">
-        <a href="#">Forgeot Password?
-        </a>
-    </small>
+
     <small class="text-muted">
         Need An Account?
-        <a class="ml-2" href="{{url_for('register')}}"> Sign Up Here</a>
+        <a class="ml-2" href="{{url_for('auth_pages.register')}}"> Sign Up Here</a>
     </small>
 </div>
 {% endblock content %}

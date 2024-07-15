@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="container3 ">
+<div class="container ">
     <img src="../static/images/machine-learning.png" alt="image">
 
     <p>{{ text }}</p>
     
 </div>
-<a class="button" href="{{ url_for('skills') }}">Get Started</a>
+<a class="button" href="{{ url_for('skill_pages.skills') }}">Get Started</a>
 
 
 {% endblock content %}

@@ -23,48 +23,33 @@
 <body>
     <!-- Navbar -->
     <nav class="header">
-        <div class="container2">
-            <a href="{{url_for('home')}}" class="logo">Big Skills</a>
-            
-           
+            <a href="{{url_for('main_pages.home')}}" class="logo">Big Skills</a>
                 <ul class="main-nav">
                     <li>
-                        <a href="{{url_for('about')}}" class="">About</a>
+                        <a href="{{url_for('main_pages.about')}}" class="{% block aboutactive %}{% endblock %}">About</a>
                     </li>
                     
-              
                 <!-- User Links -->
-               
                     {% if current_user.is_authenticated %}
-                    
-                
-                       
-                            <li class="">
-                                <a href="{{ url_for('dashboard') }}" class="dropdown-item">Dashboard</a>
+                            <li>
+                                <a href="{{ url_for('skill_pages.skills') }}" class="dropdown-item {% block skillsactive %}{% endblock %}">Skills</a>
                             </li>
-                            <li class="">
-                                <a href="{{ url_for('delete') }}" class="dropdown-item">Delete</a>
+                            <li>
+                                <a href="{{ url_for('main_pages.dashboard') }}" class="dropdown-item {% block dashactive %}{% endblock %}">Dashboard</a>
+                                
                             </li>
-                            <li class="">
-                                <a href="{{ url_for('update') }}" class="dropdown-item">Update</a>
+                            <li>
+                                <a href="{{ url_for('auth_pages.logout') }}" class="dropdown-item ">Logout</a>
                             </li>
-                            <li class="">
-                                <a href="{{ url_for('logout') }}" class="dropdown-item">Logout</a>
-                            </li>
-                       
-            
                     {% else %}
-            
-                    <li>
-                        <a href="{{ url_for('register') }}" class="">Register</a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('login') }}" class="">Login</a>
-                    </li>
+                            <li>
+                                <a href="{{ url_for('auth_pages.register') }}" class="{% block registeractive %}{% endblock %}">Register</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('auth_pages.login') }}" class="{% block loginactive %}{% endblock %}">Login</a>
+                            </li>
                     {% endif%}
                 </ul>
-            
-        </div>
     </nav>
     <!--Start Flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -86,21 +71,15 @@
 
 
 
-    <!-- footer -->
-    <footer>
-        <address>
-          <a href="#linkedin"><i class="bi bi-linkedin"></i></a><br />
-          &copy; By A.Samir<br />
-        
-        </address>
-      </footer>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
         {% if js %}
-     <script src="{{url_for('static',filename=js+'.js')}}"></script>
-     {% endif %}
+            <script src="{{url_for('static',filename=js+'.js')}}"></script>
+        {% endif %}
 </body>
 
 </html>

@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
+{% block dashactive %}active{% endblock %}
 {% block content %}
-<div class="container5">
+<div class="container">
     <section>
-        <div class="container2 ">
+        <div class="">
             <h1>welcome, {{current_user.username}} !</h1>
             <p>your email : {{current_user.email}} </p>
         </div>

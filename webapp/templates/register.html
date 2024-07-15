@@ -1,4 +1,5 @@
 {%extends "layout.html"%}
+{% block registeractive %}active{% endblock %}
 {% block content%}
 <div class="container abas mt-auto align-items-center container5">
     <form action="" method="POST">
@@ -97,7 +98,7 @@
     <div class="broder-top pt-3">
         <small class="text-muted">
             Already have an Account?
-            <a href="{{url_for('login')}}" class="ml-2">Sign in</a>
+            <a href="{{url_for('auth_pages.login')}}" class="ml-2">Sign in</a>
         </small>
     </div>
 </div>

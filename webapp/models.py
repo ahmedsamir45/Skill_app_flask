@@ -39,3 +39,4 @@ class Skills(db.Model):
         return f"Lesson('{self.title}', '{self.date_posted}')"
 
 
+

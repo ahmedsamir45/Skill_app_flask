@@ -1,22 +1,32 @@
 {% extends "layout.html" %}
-{% block content %}
-<div class="container4 container5">
-    <h1 class="page-head">{{ page_head }}</h1>
-    <p class="page-description">{{description}}</p>
-    <p class="page-description">{{current_user.username}}</p>
-      
-    <p class="page-description">{{no_skills}}</p>
+{% block skillsactive %}active{% endblock %}
 
-    {%for skill in skills%}
-        <div class="skill-box" >
+{% block content %}
+<div class="container">
+    <h1 class="page-head">{{ page_head }}</h1>
+
+    
+    <div class="skills">
+    {%  if length==0 %}
+        <p>you didn't add any skill yet</p>
+    {% else %}
+
+        {%for skill in skills%}
+            <div class="skill-box" >
             <div class="skill-name">{{ skill.title }}</div> 
             <div class="skill-progress"> 
                 <span  data-width="{{ skill.prog }}%" style="width: 0;" ></span>
             </div>
+            </div>
+        {% endfor %}
         </div>
-    {% endfor %}
-    <a href="{{url_for('add')}}" class="button">Add Skill</a>
+    {% endif %}
+    <div class="buttons">
+        <a href="{{url_for('skill_pages.add')}}" class="button">Add Skill</a>
+        <a href="{{url_for('skill_pages.update')}}" class="button">Update Skill</a>
+        <a href="{{url_for('skill_pages.delete')}}" class="button">Delete Skill</a>
+    </div>
+
 </div>
 {% endblock content %}
 
-<!-- style="width: {{skill[1] }}% ;" -->

@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,SubmitField,BooleanField,IntegerField
 from wtforms.validators import DataRequired,Length,Email,Regexp,EqualTo,ValidationError,NumberRange
 from webapp.models import User,Skills
-from app import app
+
 from flask_login import current_user
 
 
@@ -62,8 +62,8 @@ class AddForm(FlaskForm):
     submit = SubmitField("ADD")
 
     def validate_title(self,title):
-        with app.app_context():
-            skill = Skills.query.filter_by(title=title.data,user_id=current_user.id).first()
+        
+        skill = Skills.query.filter_by(title=title.data,user_id=current_user.id).first()
         if skill:
             raise ValidationError("Skill is already exists! Please Enter a different one")
         

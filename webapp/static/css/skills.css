@@ -41,13 +41,7 @@ body,html{
     border: 1px solid #ccc;
     width: 450px;
 }
-.container4{
-    padding-left: 15px;
-    padding-right: 15px; 
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 60px;
-}
+
 
 @media (max-width: 767px){
     .skill-box {
@@ -82,10 +76,15 @@ body,html{
     transition: width 1s linear;
 }
 
-.container5{
-    height: 100%;
-    position: relative;
-}
+
 .button{
     margin-bottom: 20px;
+}
+.skills p{
+    width: fit-content;
+    text-align: center;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
 }
