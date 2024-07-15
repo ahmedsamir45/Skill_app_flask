@@ -1,2 +1,2 @@
 # Skill_app_flask
-this is a simple web app with login manager system and add delete update remove skill with flask
+crud system with login manger and sqlalchemy orm with handle error pages and admin page
