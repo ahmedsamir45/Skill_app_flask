@@ -1,3 +1,4 @@
 appenv/
 instance/
 .env
+test.py
