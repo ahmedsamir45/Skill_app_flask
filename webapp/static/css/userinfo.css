@@ -1,0 +1,20 @@
+/* Add to your main CSS file */
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.progress {
+    background-color: #e9ecef;
+}
+
+.list-group-item {
+    transition: all 0.2s;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}

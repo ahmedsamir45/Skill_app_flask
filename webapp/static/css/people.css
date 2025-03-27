@@ -1,0 +1,12 @@
+.skill{
+    display: inline;
+    background-color: #eee;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 20px;
+}
+.skill:hover{
+    background-color: #dadada;
+    transition: .5s;
+}
+

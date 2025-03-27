@@ -30,4 +30,17 @@ class MyAdminIndexView(AdminIndexView):
         return current_user.is_authenticated and current_user.id == 1
         # return True
     
+class SkillsModelView(ModelView):
+    column_list = ['id', 'title', 'prog', 'desc', 'user_id']
+    form_columns = ['title', 'prog', 'desc', 'user_id']
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.id == 1
 
+class JobsModelView(ModelView):
+    column_list = ['id', 'title', 'company', 'posted_by', 'date_posted', 'deadline']
+    column_searchable_list = ['title', 'company']
+    column_filters = ['type', 'company']
+    form_columns = ['title', 'type', 'company', 'company_url', 'description', 
+                   'skills_required', 'link_to_apply', 'deadline', 'posted_by']
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.id == 1

@@ -8,19 +8,239 @@ td{
     padding: 5px;
     margin: 5px;
 }
+table thead tr:first-of-type:first-child{
+    font-weight: bold;
+    background-color: white;
+
+}
 
 table{
     text-align: center;
-    padding: 20ox;
-    margin: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 80%;
+    margin: 20px auto;
 }
-@media (max-width:767px) {
-    .section{
-        width: 500px;
+
+/* Profile image styling */
+.profile-image-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Cropper modal styling */
+#cropModal .modal-dialog {
+    max-width: 800px;
+}
+
+#imagePreview {
+    max-width: 100%;
+    max-height: 70vh;
+}
+
+/* Preview container */
+#previewContainer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+@media (max-width:780px) {
+    table{
+        font-size: 10px;
     }
 }
-.container5{
-margin-bottom: 85px;
+
+/* Ensure cropper works properly with Bootstrap modal */
+.modal {
+    z-index: 1060; /* Higher than Bootstrap's default */
+}
+
+.cropper-container {
+    z-index: 1061; /* Above the modal */
+}
+
+/* Fix for cropper in modal */
+.modal-body {
+    padding: 0;
+    overflow: hidden;
+}
+
+.img-container {
+    max-height: 70vh;
+    margin: 0 auto;
+}
+
+.profile-image-container {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #f8f9fa;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cropper-modal {
+    opacity: 0.5;
+    background-color: black;
+}
+
+.cropper-view-box {
+    outline: 1px solid white;
+    outline-color: rgba(255,255,255,0.8);
+}
+
+.profile-image-container {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #f8f9fa;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card {
+    border: none;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.img-container {
+    max-height: 70vh;
+    overflow: hidden;
+}
+
+.badge {
+    font-weight: 500;
+}
+
+.progress {
+    height: 1.5rem;
+}
+
+.progress-bar {
+    font-weight: 500;
+}
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@media print {
+	body {
+		margin: 0 !important;
+	}
+}
+
+.main-container {
+	font-family: 'Lato';
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ck-content {
+	font-family: 'Lato';
+	line-height: 1.6;
+	word-break: break-word;
+}
+
+.editor-container_classic-editor .editor-container__editor {
+	min-width: 795px;
+	max-width: 795px;
+}
+
+
+
+.cropper-view-box {
+    outline: 2px solid #0d6efd;
+    outline-color: rgba(13, 110, 253, 0.75);
+}
+.cropper-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.cropper-point {
+    background-color: #0d6efd;
+
+}
+
+.button-56 {
+  align-items: center;
+  background-color: #fee6e3;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-56:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+.button-56:hover:after {
+  transform: translate(0, 0);
+}
+
+.button-56:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.button-56:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .button-56 {
+    padding: 0 40px;
+  }
 }

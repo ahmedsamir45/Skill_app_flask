@@ -24,13 +24,119 @@
     color: #2196f3;
     font-size: 20px;
 }
-footer {
-    width: 100%;
-    background-color: #2a2a40;
+
+  .home-container {
     display: flex;
+    align-items: center;
     justify-content: center;
-    position: fixed;
-    bottom: 0;
-    margin-top: 60px;
-  }
-  
+    text-align: center;
+    min-height: 80vh;
+    gap: 40px;
+}
+
+.home-text {
+    max-width: 500px;
+}
+
+.home-text h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.home-text p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.home-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.home-image img {
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .home-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .home-image img {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+
+/* General Styles */
+.getting-started {
+    padding: 30px 10px;
+
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+
+/* Steps Container using Grid */
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 20px;
+    justify-content: center;
+    max-width: 600px; /* Limit width for better alignment */
+    margin: 0 auto; /* Center the grid */
+}
+
+
+/* Optional: Adjust the gap and minmax for smaller screens */
+@media (max-width: 650px) {
+    .steps-container {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 15px;
+        max-width: 400px; /* Optional: constrain width on mobile */
+    }
+}
+
+/* Step Card */
+.step-card {
+    background: white;
+    padding: 20px;
+    width: 275px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+}
+
+.step-card:hover {
+    transform: scale(1.1);
+
+}
+
+/* Icons */
+.step-icon {
+    font-size: 40px;
+    color: #007bff;
+    margin-bottom: 10px;
+}

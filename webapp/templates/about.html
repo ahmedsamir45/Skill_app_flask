@@ -1,31 +1,71 @@
 {% extends "layout.html" %}
 {% block aboutactive %}active{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="message">
-        <p>
-            Al Slam Alykom   , this web app make you follow your skills and its progress.
-             you can update your progress of your skills and make describtion for each skill.
-        </p>
-        <div class="dashboard">
-    <h3>your dashboard contains:-</h3>
-        <ul>
-            <li>Your email</li>
-            <li>Your Skills</li>
-            <li>Your progress</li>
-            <li>Your describtion</li>
-        </ul>
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1>Empower Your Career with Big Skills</h1>
+        <p class="lead text-muted">Big Skills is the premier platform connecting fresh graduates, skilled employees, and HR recruiters to track professional development and discover ideal job opportunities.</p>
     </div>
-  <div class="contact-us">
-   <h2> Contact Us <i class="bi bi-telephone"></i> :- </h2>
-   <div class="links">
-    <a href="">linked in</a>
-    <a href="">github</a>
-    <a href="">gmail</a>
-    <span><label for="tel">tel:</label><a href="tel:+201062303374">01062303374</a></span>
-   </div>
-  </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4" itemscope itemtype="https://schema.org/Service">
+                <div class="card-body">
+                    <h2 class="card-title" itemprop="name"><i class="bi bi-graph-up" aria-hidden="true"></i> Track Your Skills</h2>
+                    <p class="card-text" itemprop="description">
+                        Stay ahead in your career by monitoring your professional skills and maintaining detailed growth records. SkillsHub provides valuable insights to improve and showcase your expertise to potential employers.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4" itemscope itemtype="https://schema.org/Service">
+                <div class="card-body">
+                    <h2 class="card-title" itemprop="name"><i class="bi bi-briefcase" aria-hidden="true"></i> Find Job Opportunities</h2>
+                    <p class="card-text" itemprop="description">
+                        Discover curated job listings that match your unique skill set. Apply directly through our platform or save jobs for later. Employers are actively searching for qualified candidates like you!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4" itemscope itemtype="https://schema.org/Service">
+                <div class="card-body">
+                    <h2 class="card-title" itemprop="name"><i class="bi bi-person-badge" aria-hidden="true"></i> Build Your Professional Profile</h2>
+                    <p class="card-text" itemprop="description">
+                        Create a comprehensive professional profile showcasing your skills, work experiences, and certifications. Our platform helps you attract recruiters and unlock new career opportunities.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4" itemscope itemtype="https://schema.org/Service">
+                <div class="card-body">
+                    <h2 class="card-title" itemprop="name"><i class="bi bi-people" aria-hidden="true"></i> Connect & Network</h2>
+                    <p class="card-text" itemprop="description">
+                        Join our growing community of professionals, interact directly with recruiters, and expand your professional network to access exclusive career opportunities in your field.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm" itemscope itemtype="https://schema.org/ContactPage">
+        <div class="card-body text-center">
+            <h2 class="card-title" itemprop="name"><i class="bi bi-telephone" aria-hidden="true"></i> Contact Big Skills</h2>
+            <p class="card-text" itemprop="description">Have questions about our career development platform? Reach our team through these channels:</p>
+            <div class="btn-group" role="group" aria-label="Contact options">
+                <a href="https://www.linkedin.com/in/ahmed-samir-917ba22a5/" class="btn btn-outline-primary" itemprop="sameAs"><i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn</a>
+                <a href="https://github.com/ahmedsamir45" class="btn btn-outline-dark" itemprop="sameAs"><i class="bi bi-github" aria-hidden="true"></i> GitHub</a>
+                <a href="mailto:ahmedsamer@gmail.com" class="btn btn-outline-danger" itemprop="email"><i class="bi bi-envelope" aria-hidden="true"></i> Email</a>
+                <a href="tel:+201062303374" class="btn btn-outline-success" itemprop="telephone"><i class="bi bi-telephone" aria-hidden="true"></i> Call Us</a>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-<br/>
+
 {% endblock content %}

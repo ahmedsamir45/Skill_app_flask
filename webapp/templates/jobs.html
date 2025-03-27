@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block jobsactive %}active{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Job Listings</h1>
+    <form class="form-search-bar" method="GET" action="{{ url_for('main_pages.jobs') }}">
+        <label for="search">Search</label>
+        <input id="search" name="search" type="search" pattern=".*\S.*" required 
+               value="{{ search_query if search_query }}">
+        <span class="caret"></span>
+        <button type="submit" style="display: none"></button> <!-- Hidden submit button -->
+    </form>
+    
+    {% if jobs %}
+        {% for job in jobs %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <!-- Member Info -->
+                <div class="d-flex align-items-center mb-3">
+                    <img class="rounded-circle me-3" 
+                         src="{{ url_for('static', filename='profile_pics/' + (job.posted_by.image_file or 'default/default.png')) }}" 
+                         alt="{{ job.posted_by.username }}" 
+                         style="width: 50px; height: 50px; object-fit: cover;">
+                    <div>
+                        <a href="{{ url_for('main_pages.user_info', username=job.posted_by.username) }}">
+                            <h5 class="card-title mb-0">{{ job.posted_by.username }}</h5>
+                        </a>
+                        <small class="text-muted">Posted on {{ job.date_posted.strftime('%B %d, %Y') }}</small>
+                    </div>
+                </div>
+
+                <!-- Job Details -->
+                <h3 class="card-title mb-3">{{ job.title }}</h3>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p class="card-text">
+                            <strong>Company:</strong> 
+                            {% if job.company_url %}
+                                <a href="{{ job.company_url }}" target="_blank">{{ job.company }}</a>
+                            {% else %}
+                                {{ job.company }}
+                            {% endif %}
+                        </p>
+                        <p class="card-text"><strong>Type:</strong> {{ job.type }}</p>
+                        <p class="card-text"><strong>Deadline:</strong> {{ job.deadline.strftime('%B %d, %Y') }}</p>
+                    </div>
+                </div>
+
+                <!-- Description with Safe HTML Rendering -->
+                <div class="card-text mb-3">
+                    <strong>Description:</strong>
+                    <div class="border rounded p-3 bg-light">
+                        {{ job.description|safe }}
+                    </div>
+                </div>
+
+                <!-- Skills with Badge Display -->
+                <div class="card-text mb-3">
+                    <strong>Skills Required:</strong>
+                    <div>
+                        {% for skill in job.skills_required.split(',') %}
+                            <span class="badge bg-secondary me-1 mb-1">{{ skill.strip() }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Apply and Save Buttons -->
+                <div class="d-flex gap-2">
+                    <a href="{{ job.link_to_apply }}" class="btn btn-primary" target="_blank">
+                        <i class="bi bi-box-arrow-up-right me-1"></i>Apply Now
+                    </a>
+                    {% if current_user.is_authenticated %}
+                        {% set is_saved = job in current_user.saved_jobs %}
+                        <form method="POST" action="{{ url_for('auth_pages.save_job', job_id=job.id) }}" class="d-inline">
+                            <button type="submit" class="btn {{ 'btn-success' if not is_saved else 'btn-outline-secondary' }}">
+                                {{ 'Save Job' if not is_saved else 'Saved' }}
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info text-center" role="alert">
+            {% if search_query %}
+                No jobs found matching your search.
+            {% else %}
+                No job listings available at the moment.
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+
+<!-- Add JavaScript for better search UX -->
+
+{% endblock content %}

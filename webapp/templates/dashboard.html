@@ -1,37 +1,290 @@
 {% extends "layout.html" %}
 {% block dashactive %}active{% endblock %}
 {% block content %}
-<div class="container">
-    <section>
-        <div class="">
-            <h1>welcome, {{current_user.username}} !</h1>
-            <p>your email : {{current_user.email}} </p>
+
+<div class="container mt-5">
+    <!-- User Profile Section -->
+    <section class="mb-5">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <div class="profile-image-container mb-3">
+                    <img id="profileImage" src="{{ url_for('static', filename='profile_pics/' + (current_user.image_file if current_user.image_file else 'default.jpg')) }}" 
+                         class="profile-image" alt="Profile Picture">
+                  
+                </div>
+               
+
+                <h1 class="card-title">Welcome, {{ current_user.fname }} {{ current_user.lname }}!</h1>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <p class="card-text"><strong>Username:</strong> {{ current_user.username }}</p>
+                        <p class="card-text"><strong>Email:</strong> {{ current_user.email }}</p>
+                        <p class="card-text"><strong>Role:</strong> {{ current_user.register_as|capitalize }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="card-text"><strong>Phone:</strong> {{ current_user.phone_number or 'Not provided' }}</p>
+                        <p class="card-text"><strong>Resume:</strong> 
+                            {% if current_user.resume_link %}
+                                <a href="{{ current_user.resume_link }}" target="_blank">View Resume</a>
+                            {% else %}
+                                Not provided
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                {% if current_user.bio %}
+                <div class="mt-3">
+                    <h5>About Me</h5>
+                    <p class="card-text">{{ current_user.bio }}</p>
+                </div>
+                {% endif %}
+            </div>
         </div>
     </section>
 
-    <section>
+   <!-- Update Profile Form -->
+<section class="mb-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Update Profile</h2>
+            <form method="POST" action="{{ url_for('auth_pages.dashboard') }}" enctype="multipart/form-data">
+                {{ profile_form.hidden_tag() }}
+                <input type="hidden" name="cropped_image" id="croppedImageData">
 
-        <table border="1">
-            <!-- <caption>Your Skills</caption> -->
-
-            <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Progress</td>
-                    <td>Description</td>
-                </tr>
-            </thead>
-            <tbody>
-                {% for skill in skills %}
-                <tr>
-                    <td>{{skill.title}}</td>
-                    <td>{{skill.prog}}</td>
-                    <td>{{skill.desc}}</td>
-                </tr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            {{ profile_form.fname.label(class="form-label") }}
+                            {{ profile_form.fname(class="form-control") }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ profile_form.phone_number.label(class="form-label") }}
+                            {{ profile_form.phone_number(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            {{ profile_form.lname.label(class="form-label") }}
+                            {{ profile_form.lname(class="form-control") }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ profile_form.register_as.label(class="form-label") }}
+                            <select name="register_as" class="form-select">
+                                <option value="hirer" {% if current_user.register_as == 'hirer' %}selected{% endif %}>Hirer</option>
+                                <option value="employee" {% if current_user.register_as == 'employee' %}selected{% endif %}>Employee</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group mb-3">
+                    {{ profile_form.bio.label(class="form-label") }}
+                    <textarea name="bio" class="form-control" rows="3">{{ current_user.bio or '' }}</textarea>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label class="form-label">Profile Picture</label>
+                    <div class="d-flex align-items-center mb-3">
+                        <img id="currentProfileImage" src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" 
+                             class="rounded-circle me-3" width="80" height="80" style="object-fit: cover;">
+                        <div>
+                            <input type="file" id="imageUpload" class="form-control" accept="image/*" style="display: none;">
+                            <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('imageUpload').click()">
+                                Change Photo
+                            </button>
+                            <div class="form-text">Recommended size: 400×400 pixels</div>
+                        </div>
+                    </div>
+                    <div id="imagePreviewContainer" class="text-center mt-3" style="display: none;">
+                        <img id="croppedPreview" class="img-thumbnail rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                    </div>
+                </div>
+                
+                <div class="form-group text-center">
+                    <button type="submit" name="submit_profile" class="btn btn-primary btn-lg">Update Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+   <!-- Skills Section -->
+   <section class="mb-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Your Skills</h2>
+            {% if current_user.skills %}
+            <div class="row">
+                {% for skill in current_user.skills %}
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ skill.title }}</h5>
+                            <div class="progress mb-2">
+                                <div class="progress-bar" style="background-color: rgba(14, 212, 166, 0.818);width: {{ skill.prog }}%">{{ skill.prog }}%</div>
+                            </div>
+                            <p class="card-text">{{ skill.desc }}</p>
+                            <small class="text-muted">Added: {{ skill.date_posted.strftime('%b %d, %Y') }}</small>
+                        </div>
+                    </div>
+                </div>
                 {% endfor %}
-               
-            </tbody>
-         </table>
-    </section>
+            </div>
+            {% else %}
+            <p class="text-center">You haven't added any skills yet.</p>
+            {% endif %}
+            <a class="btn btn-primary btn-lg" href="{{ url_for('skill_pages.skills') }}">Manage Skills</a>
+        </div>
+    </div>
+</section>
+<!-- Image Cropper Modal -->
+<div class="modal fade" id="imageCropModal" tabindex="-1" aria-labelledby="imageCropModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageCropModalLabel">Crop Your Profile Picture</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container" style="max-height: 60vh;">
+                    <img id="imagePreview" src="" style="max-width: 100%; display: block;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="cropImageBtn">Save Cropped Image</button>
+            </div>
+        </div>
+    </div>
 </div>
-{% endblock content %}
+
+
+    <!-- Job Posting Section -->
+    <section class="mb-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title mb-4">Post a New Job</h2>
+                <form method="POST" action="{{ url_for('auth_pages.dashboard') }}">
+                    {{ job_form.hidden_tag() }}
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Job Title</label>
+                        {{ job_form.title(class="form-control", required="required") }}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Job Type</label>
+                        {{ job_form.type(class="form-select", required="required") }}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Company Name</label>
+                        {{ job_form.company(class="form-control", required="required") }}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Company Website</label>
+                        {{ job_form.company_url(class="form-control") }}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Job Description</label>
+                        {{ job_form.description(class="form-control", rows="5", required="required",id="jobDescription") }}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Skills Required</label>
+                        {{ job_form.skills_required(class="form-control", required="required") }}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Application Deadline</label>
+                        {{ job_form.deadline(class="form-control", required="required") }}
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Application Link</label>
+                        {{ job_form.link_to_apply(class="form-control", required="required") }}
+                    </div>
+                    
+                    <div class="form-group text-center">
+                        <button type="submit" name="submit_job" class="btn btn-primary btn-lg">Post Job</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Saved Jobs Section -->
+<!-- Saved Jobs Section -->
+<section class="mb-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Your Saved Jobs</h2>
+            {% if saved_jobs %}
+            <div class="row">
+                {% for saved_job in saved_jobs %}
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 position-relative">
+                        <!-- Delete Job Button -->
+                        <form method="POST" action="{{ url_for('auth_pages.unsave_job', job_id=saved_job.id) }}" 
+                              class="position-absolute top-0 end-0 m-2">
+                            <button type="submit" class="btn btn-outline-danger btn-sm" 
+                                    data-bs-toggle="tooltip" 
+                                    title="Remove from Saved Jobs">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+
+                        <div class="card-body">
+                            <h3 class="card-title">{{ saved_job.title }}</h3>
+                            <h5 class="card-subtitle mb-2 text-muted">{{ saved_job.company }}</h5>
+                            
+                            <div class="card-text mb-3">
+                                <strong>Description:</strong>
+                                <div class="border rounded p-2 bg-light">
+                                    {{ saved_job.description|safe|truncate() }}
+                                </div>
+                            </div>
+
+                            <div class="mb-2">
+                                <strong>Skills:</strong> 
+                                {% for skill in saved_job.skills_required.split(',') %}
+                                <span class="badge bg-secondary me-1 mb-1">{{ skill.strip() }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">
+                                    <i class="bi bi-calendar-check me-1"></i>
+                                    Posted: {{ saved_job.date_posted.strftime('%b %d, %Y') }}
+                                </small>
+                                <small class="text-muted">
+                                    <i class="bi bi-clock me-1"></i>
+                                    Deadline: {{ saved_job.deadline.strftime('%b %d, %Y') }}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="card-footer bg-transparent d-flex justify-content-between">
+                            <a href="{{ saved_job.link_to_apply }}" class="btn btn-primary" target="_blank">
+                                <i class="bi bi-box-arrow-up-right me-1"></i>Apply Now
+                            </a>
+                            <a href="{{ url_for('main_pages.job_detail', job_id=saved_job.id) }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-info-circle me-1"></i>Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="alert alert-info text-center" role="alert">
+                <i class="bi bi-bookmark-heart me-2"></i>
+                You haven't saved any jobs yet. Start exploring job listings!
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+</div>
+
+{% endblock %}

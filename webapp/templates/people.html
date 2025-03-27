@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% block peopleactive %}active{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="page-head text-center mb-4">Members</h1>
+    <form class="form-search-bar"  method="GET" action="{{ url_for('main_pages.people') }}">
+        <label for="search">Search</label>
+        <input id="search" type="search" name="search" type="search" pattern=".*\S.*" required 
+        value="{{ search_query if search_query }}" placeholder="Search about members">
+        <span class="caret"></span>
+    </form>
+
+      {% if people %}
+    <div class="row justify-content-center align-items-center flex-column">
+        {% for person in people %}
+        <div class="col-12 col-md-8 col-lg-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <!-- User Image -->
+                    <div class="text-center mb-3">
+                        <img class="rounded-circle account-img" src="{{ url_for('static', filename='profile_pics/' + person.image_file) }}" alt="{{ person.username }}'s Profile Image" style="width: 100px; height: 100px;">
+                    </div>
+
+                    <!-- Username -->
+                    <a href="{{ url_for('main_pages.user_info', username=person.username) }}"><h3 class="card-title text-center">{{ person.username }}</h3></a>
+
+                    <!-- Email -->
+                    <p class="card-text text-center">
+                        <a href="mailto:{{ person.email }}" class="text-decoration-none">{{ person.email }}</a>
+                    </p>
+
+                    <!-- Phone Number -->
+                    {% if person.phone_number %}
+                    <p class="card-text text-center">
+                        <strong>Phone:</strong> 
+                        <a href="tel:{{ person.phone_number }}" class="text-decoration-none">{{ person.phone_number }}</a>
+                    </p>
+                    {% endif %}
+
+                    <!-- Bio -->
+                    {% if person.bio %}
+                    <p class="card-text">
+                        <strong>Bio:</strong> {{ person.bio }}
+                    </p>
+                    {% endif %}
+
+                    <!-- Resume Link -->
+                    {% if person.resume_link %}
+                    <p class="card-text">
+                        <strong>Resume:</strong> 
+                        <a href="{{ person.resume_link }}" target="_blank" class="text-decoration-none">View Resume</a>
+                    </p>
+                    {% endif %}
+
+                    <!-- Skills -->
+                    <h6 class="text-muted">Skills:</h6>
+                    <ul class="list-group list-group-flush">
+                        {% for skill in person.skills %}
+                        <li class="skill">
+                            <span>{{ skill.title }}</span>
+                            <span class="badge bg-primary rounded-pill">{{ skill.prog }}%</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info mt-4">
+        No members found matching your search.
+    </div>
+    {% endif %}
+</div>
+
+{% endblock content %}

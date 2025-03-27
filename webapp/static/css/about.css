@@ -1,14 +1,39 @@
 
 
+    .card {
+        border: none;
+        border-radius: 12px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
 
 
-.links{
-    display: flex;
-    flex-direction: column;
-    margin-left: 10px;
-    gap: 10px;
-}
+    .card-title {
+        font-weight: bold;
+        color: #007bff;
+    }
 
-.links span label{
-    margin-right: 5px;
-}
+    .btn-group a {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+        margin: 5px;
+    }
+
+    .btn-group a:hover {
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+        .btn-group {
+            flex-direction: column;
+        }
+        .btn-group a {
+            margin-bottom: 10px;
+        }
+    }

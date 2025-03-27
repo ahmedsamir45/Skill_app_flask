@@ -1,13 +1,69 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="container ">
-    <img src="../static/images/machine-learning.png" alt="image">
+<div class="container home-container">
+    <div class="home-image">
+        <img src="{{ url_for('static', filename='images/machine-learning.png') }}" 
+             alt="Machine Learning Skills Development Platform" 
+             title="SkillsHub - Skill Development Platform">
+    </div>
 
-    <p>{{ text }}</p>
-    
+    <div class="home-text">
+        <h1>Welcome to SkillsHub - Your Career Development Platform</h1>
+        <p>
+            SkillsHub helps fresh graduates, employees, and HR recruiters manage professional skills, 
+            track career progress, and discover matching job opportunities in the tech industry.
+        </p>
+        
+        <button class="button-36" role="button">
+            <a href="{{ url_for('auth_pages.dashboard') }}" aria-label="Get started with SkillsHub">Get Started</a>
+        </button>
+    </div>
+
+    <!-- Getting Started Section -->
+    <section class="getting-started" aria-label="How to get started with SkillsHub">
+        <div class="container">
+            <h2 class="sr-only">Getting Started with SkillsHub</h2>
+            <div class="steps-container">
+                <!-- Step 1 -->
+                <div class="step-card" itemscope itemtype="https://schema.org/HowToStep">
+                    <div class="step-icon">
+                        <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                    <h3 itemprop="name">1. Create Account</h3>
+                    <p itemprop="text">Register with your email to access all career development features</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card" itemscope itemtype="https://schema.org/HowToStep">
+                    <div class="step-icon">
+                        <i class="fas fa-tasks" aria-hidden="true"></i>
+                    </div>
+                    <h3 itemprop="name">2. Complete Profile</h3>
+                    <p itemprop="text">Add your skills and information from the dashboard</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-card" itemscope itemtype="https://schema.org/HowToStep">
+                    <div class="step-icon">
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                    </div>
+                    <h3 itemprop="name">3. Track Progress</h3>
+                    <p itemprop="text">Monitor your skill development and career growth over time</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step-card" itemscope itemtype="https://schema.org/HowToStep">
+                    <div class="step-icon">
+                        <i class="fas fa-briefcase" aria-hidden="true"></i>
+                    </div>
+                    <h3 itemprop="name">4. Opportunities</h3>
+                    <p itemprop="text">Discover jobs perfectly matching your skills and aspirations.</p>
+                    <p itemprop="text">and post any job to help others</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
-<a class="button" href="{{ url_for('skill_pages.skills') }}">Get Started</a>
-
 
 {% endblock content %}

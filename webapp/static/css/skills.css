@@ -88,3 +88,6 @@ body,html{
     background-color: white;
     border-radius: 20px;
 }
+.container{
+    padding-bottom: 40px;
+}

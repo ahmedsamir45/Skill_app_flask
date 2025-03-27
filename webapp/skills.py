@@ -32,10 +32,10 @@ def delete():
             db.session.delete(skill)
             db.session.commit()
             flash(f"Skill deleted successfully for {skill.title}", "success")
-            return redirect(url_for("skills"))
+            return redirect(url_for("skill_pages.skills"))
     else:
         flash(f"You do not have skills", category='info')
-        return redirect(url_for("skills"))
+        return redirect(url_for("skill_pages.skills"))
     return render_template('delete.html',custom='delete',skills=skills ,form=form)
 
 @skill_pages.route("/update",methods=['GET','POST'])
@@ -54,10 +54,10 @@ def update():
             skill.prog = progress
             db.session.commit()
             flash(f" Progress of Skill  updated successfully for {skill_u}", "success")
-            return redirect(url_for("skills"))
+            return redirect(url_for("skill_pages.skills"))
     else:
         flash(f"You do not have skills", category='info')
-        return redirect(url_for("skills"))
+        return redirect(url_for("skill_pages.skills"))
     
     return render_template('update.html',custom='update',skills=skills ,form=form)
 
@@ -73,7 +73,7 @@ def add():
         db.session.add(skill)
         db.session.commit()
         flash(f"Skill added successfully for {form.title.data}", "success")
-        return redirect(url_for("skills"))
+        return redirect(url_for("skill_pages.skills"))
     return render_template('add.html',custom='add',form=form)
 
 

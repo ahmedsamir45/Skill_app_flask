@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ job.title }}</h2>
+            <h4 class="card-subtitle mb-2 text-muted">{{ job.company }}</h4>
+            <p class="card-text">{{ job.description|safe }}</p>
+            <p><strong>Skills Required:</strong> {{ job.skills_required }}</p>
+            <p><strong>Posted On:</strong> {{ job.date_posted.strftime('%Y-%m-%d') }}</p>
+            <p><strong>Deadline:</strong> {{ job.deadline.strftime('%Y-%m-%d') }}</p>
+            <a href="{{ job.link_to_apply }}" class="btn btn-primary" target="_blank">Apply Now</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,105 +1,169 @@
-{%extends "layout.html"%}
+{% extends "layout.html" %}
 {% block registeractive %}active{% endblock %}
-{% block content%}
-<div class="container abas mt-auto align-items-center container5">
-    <form action="" method="POST">
-        {{ form.hidden_tag()}}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4"> Create an Account</legend>
-            <div class="form-group">
-                {{ form.fname.label(class='form-control-label')}}
-                {% if form.fname.errors%}
-                {{ form.fname(class='form-control form-control-lg is-invalid')}}
-                <div class="invalid-feedback">
-                    {% for error in form.fname.errors %}
-                    <span>{{error}}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.fname(class='form-control form-control-lg')}}
-                {% endif %}
 
-            </div>
-            <div class="form-group">
-                {{ form.lname.label(class='form-control-label')}}
-                {% if form.lname.errors%}
-                {{ form.lname(class='form-control form-control-lg is-invalid')}}
-                <div class="invalid-feedback">
-                    {% for error in form.lname.errors %}
-                    <span>{{error}}</span>
-                    {% endfor %}
+{% block content %}
+<div class="auth-container">
+    <div class="card auth-card">
+        <div class="auth-header">
+            <h2 class="mb-0">Create Your Account</h2>
+        </div>
+        <div class="card-body p-4">
+            <form action="" method="POST" novalidate>
+                {{ form.hidden_tag() }}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        {{ form.fname.label(class="form-label") }}
+                        {{ form.fname(class="form-control form-control-lg", placeholder="First Name") }}
+                        {% for error in form.fname.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        {{ form.lname.label(class="form-label") }}
+                        {{ form.lname(class="form-control form-control-lg", placeholder="Last Name") }}
+                        {% for error in form.lname.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
                 </div>
-                {% else %}
-                {{ form.lname(class='form-control form-control-lg')}}
-                {% endif %}
 
-            </div>
-            <div class="form-group">
-                {{ form.username.label(class='form-control-label')}}
-                {% if form.username.errors%}
-                {{ form.username(class='form-control form-control-lg is-invalid')}}
-                <div class="invalid-feedback">
+                <div class="mb-3">
+                    {{ form.username.label(class="form-label") }}
+                    {{ form.username(class="form-control form-control-lg", placeholder="Choose a Username") }}
                     {% for error in form.username.errors %}
-                    <span>{{error}}</span>
+                        <div class="invalid-feedback d-block">{{ error }}</div>
                     {% endfor %}
                 </div>
-                {% else %}
-                {{ form.username(class='form-control form-control-lg')}}
-                {% endif %}
 
-            </div>
-            <div class="form-group">
-                {{ form.email.label(class='form-control-label')}}
-                {% if form.email.errors%}
-                {{ form.email(class='form-control form-control-lg is-invalid')}}
-                <div class="invalid-feedback">
+                <div class="mb-3">
+                    {{ form.email.label(class="form-label") }}
+                    {{ form.email(class="form-control form-control-lg", placeholder="Your Email Address") }}
                     {% for error in form.email.errors %}
-                    <span>{{error}}</span>
+                        <div class="invalid-feedback d-block">{{ error }}</div>
                     {% endfor %}
                 </div>
-                {% else %}
-                {{ form.email(class='form-control form-control-lg')}}
-                {% endif %}
 
-            </div>
-            <div class="form-group">
-                {{ form.password.label(class='form-control-label')}}
-                {% if form.password.errors%}
-                {{ form.password(class='form-control form-control-lg is-invalid')}}
-                <div class="invalid-feedback">
+              
+
+                <div class="mb-3">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password(class="form-control form-control-lg", id="password-field", placeholder="Enter a strong password") }}
                     {% for error in form.password.errors %}
-                    <span>{{error}}</span>
+                        <div class="invalid-feedback d-block">{{ error }}</div>
                     {% endfor %}
+                    <div class="password-requirements mt-2">
+                        <small>Password requirements:</small>
+                        <p class="mb-1" id="length-requirement"><small>✗ At least 8 characters</small></p>
+                        <p class="mb-1" id="lowercase-requirement"><small>✗ Contains lowercase letter</small></p>
+                        <p class="mb-1" id="uppercase-requirement"><small>✗ Contains uppercase letter</small></p>
+                        <p class="mb-1" id="number-requirement"><small>✗ Contains number</small></p>
+                        <p class="mb-1" id="special-requirement"><small>✗ Contains special character</small></p>
+                        <p class="mb-1" id="complexity-requirement"><small>✗ Needs 2 of: lowercase, uppercase, numbers, or special chars</small></p>
+                        <p class="mb-1" id="password-strength-meter"></p>
+                    </div>
                 </div>
-                {% else %}
-                {{ form.password(class='form-control form-control-lg')}}
-                {% endif %}
 
-            </div>
-            <div class="form-group">
-                {{ form.confirm_password.label(class='form-control-label')}}
-                {% if form.confirm_password.errors%}
-                {{ form.confirm_password(class='form-control form-control-lg is-invalid')}}
-                <div class="invalid-feedback">
+                <div class="mb-3">
+                    {{ form.confirm_password.label(class="form-label") }}
+                    {{ form.confirm_password(class="form-control form-control-lg", placeholder="Confirm your password") }}
                     {% for error in form.confirm_password.errors %}
-                    <span>{{error}}</span>
+                        <div class="invalid-feedback d-block">{{ error }}</div>
                     {% endfor %}
                 </div>
-                {% else %}
-                {{ form.confirm_password(class='form-control form-control-lg')}}
-                {% endif %}
 
+                <div class="d-grid">
+                    {{ form.submit(class="btn btn-primary btn-lg") }}
+                </div>
+            </form>
+            <div class="auth-switch">
+                Already have an account? 
+                <a href="{{ url_for('auth_pages.login') }}" class="text-primary">Log In</a>
             </div>
-            <div class="form-group">
-                {{ form.submit(class='btn btn-outline-info')}}
-            </div>
-        </fieldset>
-    </form>
-    <div class="broder-top pt-3">
-        <small class="text-muted">
-            Already have an Account?
-            <a href="{{url_for('auth_pages.login')}}" class="ml-2">Sign in</a>
-        </small>
+        </div>
     </div>
 </div>
-{% endblock content %}
+
+<script>
+    document.getElementById('password-field').addEventListener('input', function() {
+        const password = this.value;
+        
+        // Get all requirement elements
+        const lengthReq = document.getElementById('length-requirement');
+        const lowercaseReq = document.getElementById('lowercase-requirement');
+        const uppercaseReq = document.getElementById('uppercase-requirement');
+        const numberReq = document.getElementById('number-requirement');
+        const specialReq = document.getElementById('special-requirement');
+        const complexityReq = document.getElementById('complexity-requirement');
+        const strengthMeter = document.getElementById('password-strength-meter');
+        
+        // Check individual requirements
+        const hasLength = password.length >= 8;
+        const hasLowercase = /[a-z]/.test(password);
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};:'",.<>?/\\|`~]/.test(password);
+        
+        // Count how many complexity criteria are met
+        const metCriteria = [hasLowercase, hasUppercase, hasNumber, hasSpecial].filter(Boolean).length;
+        
+        // Update length requirement
+        lengthReq.innerHTML = hasLength ? 
+            '<span class="text-success">✓</span> At least 8 characters' : 
+            '<span class="text-danger">✗</span> At least 8 characters';
+        
+        // Update lowercase requirement
+        lowercaseReq.innerHTML = hasLowercase ? 
+            '<span class="text-success">✓</span> Contains lowercase letter' : 
+            '<span class="text-danger">✗</span> Contains lowercase letter';
+        
+        // Update uppercase requirement
+        uppercaseReq.innerHTML = hasUppercase ? 
+            '<span class="text-success">✓</span> Contains uppercase letter' : 
+            '<span class="text-danger">✗</span> Contains uppercase letter';
+        
+        // Update number requirement
+        numberReq.innerHTML = hasNumber ? 
+            '<span class="text-success">✓</span> Contains number' : 
+            '<span class="text-danger">✗</span> Contains number';
+        
+        // Update special character requirement
+        specialReq.innerHTML = hasSpecial ? 
+            '<span class="text-success">✓</span> Contains special character' : 
+            '<span class="text-danger">✗</span> Contains special character';
+        
+        // Update complexity requirement
+        complexityReq.innerHTML = metCriteria >= 2 ? 
+            '<span class="text-success">✓</span> Meets complexity (2 of 4 types)' : 
+            '<span class="text-danger">✗</span> Needs 2 of: lowercase, uppercase, numbers, or special chars';
+        
+        // Calculate password strength
+        let strength = 0;
+        if (hasLength) strength++;
+        if (hasLowercase) strength++;
+        if (hasUppercase) strength++;
+        if (hasNumber) strength++;
+        if (hasSpecial) strength++;
+        
+        // Update strength meter
+        if (password.length === 0) {
+            strengthMeter.innerHTML = '';
+        } else {
+            let strengthText = '';
+            let strengthClass = '';
+            
+            if (strength <= 2) {
+                strengthText = 'Weak';
+                strengthClass = 'text-danger';
+            } else if (strength <= 4) {
+                strengthText = 'Medium';
+                strengthClass = 'text-warning';
+            } else {
+                strengthText = 'Strong';
+                strengthClass = 'text-success';
+            }
+            
+            strengthMeter.innerHTML = `Strength: <span class="${strengthClass}">${strengthText}</span>`;
+        }
+    });
+    </script>
+{% endblock %}

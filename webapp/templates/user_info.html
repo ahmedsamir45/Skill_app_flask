@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- User Profile Card -->
+            <div class="card">
+                <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" 
+                     class="card-img-top rounded-circle" 
+                     alt="Profile picture">
+                <div class="card-body">
+                    <h2>{{ user.fname }} {{ user.lname }}</h2>
+                    <p class="text-muted">{{ user.email }}</p>
+                    <p class="text-muted">@{{ user.username }}</p>
+                    {% if user.bio %}
+                        <p>{{ user.bio }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <!-- Skills Section -->
+            <h3>Skills</h3>
+            {% if skills %}
+                {% for skill in skills %}
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <h5>{{ skill.title }}</h5>
+                            <div class="progress">
+                                <div class="progress-bar" 
+                                     role="progressbar" 
+                                     style="background-color: rgba(14, 212, 166, 0.818); width: {{ skill.prog }}%" 
+                                     aria-valuenow="{{ skill.prog }}" 
+                                     aria-valuemin="0" 
+                                     aria-valuemax="100">
+                                    {{ skill.prog }}%
+                                </div>
+                            </div>
+                            <p>{{ skill.desc }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No skills added yet.</p>
+            {% endif %}
+            
+            <!-- Jobs Posted Section -->
+            <h3 class="mt-4">Jobs Posted</h3>
+            {% if jobs_posted %}
+            {% for job in jobs_posted %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5><a href="{{ url_for('main_pages.job_detail', job_id=job.id) }}">{{ job.title }}</a></h5>
+                    <p>{{ job.company }}</p>
+                    <p>{{ job.description|safe|truncate(100) }}</p>
+                    <a href="{{ url_for('main_pages.job_detail', job_id=job.id) }}" class="btn btn-primary btn-sm">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+            {% else %}
+                <p>No jobs posted yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

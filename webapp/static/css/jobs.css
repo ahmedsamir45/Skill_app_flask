@@ -1,0 +1,30 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.rounded-circle {
+    border-radius: 50%;
+}
+
+
