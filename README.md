@@ -120,4 +120,4 @@ docker run -d -p 5000:5000 --env-file .env skills-app
 4. Push to the branch (`git push origin feature/fooBar`)  
 5. Create a new Pull Request
 
-[License: MIT](LICENSE)
+[License: GNU General Public License v3.0](LICENSE)
