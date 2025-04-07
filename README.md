@@ -96,21 +96,6 @@ A comprehensive skills tracking and job posting application built with Flask. Th
 - `GET /skills` - List all skills  
 - `DELETE /skills/<id>` - Remove skill
 
-## Deployment
-
-### Heroku
-```bash
-heroku config:set FLASK_ENV=production
-heroku config:set SECRET_KEY=your_secret_key
-git push heroku main
-heroku run flask db upgrade
-```
-
-### Docker
-```bash
-docker build -t skills-app .
-docker run -d -p 5000:5000 --env-file .env skills-app
-```
 
 ## Contributing
 
