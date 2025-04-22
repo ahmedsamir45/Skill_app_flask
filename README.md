@@ -1,4 +1,4 @@
-# Skills App Pro - Flask Application
+# Big Skills - Flask Application
 
 ## Overview
 
